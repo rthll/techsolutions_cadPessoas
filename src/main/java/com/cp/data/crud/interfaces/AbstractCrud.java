@@ -62,18 +62,18 @@ public abstract class AbstractCrud<T> {
         }
     }
 
-    public Exception remove(T entity) {
-        try {
-            getEntityManager().getTransaction().begin();
-            getEntityManager().remove(getEntityManager().merge(entity));
-            getEntityManager().flush();
-            getEntityManager().getTransaction().commit();
-            AppLog.getInstance().info("Registro removido com sucesso pela classe: " + this.getClass().getName());
-            return null;
-        } catch (Exception e) {
-            return e;
-        }
+ public void remove(T entity) {
+    try {
+        getEntityManager().getTransaction().begin();
+        getEntityManager().remove(getEntityManager().merge(entity));
+        getEntityManager().flush();
+        getEntityManager().getTransaction().commit();
+        AppLog.getInstance().info("Registro removido com sucesso pela classe: " + this.getClass().getName());
+    } catch (Exception e) {
+        throw new Exception("Erro ao remover a entidade na classe: " + this.getClass().getName(), e);
     }
+}
+
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
