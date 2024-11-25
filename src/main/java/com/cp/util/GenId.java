@@ -12,7 +12,7 @@ public class GenId {
     public int getIdPrimo(){
         int id = new Random().nextInt();
         if(!isPrime(id)) return getIdPrimo();
-        AppLog.getInstance().info("Numero primo gerado com sucesso!");
+        AppLog.getInstance().info("Numero gerado com sucesso!");
         return id;
     }
 
