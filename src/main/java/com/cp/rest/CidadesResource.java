@@ -23,11 +23,12 @@ public class CidadesResource {
 	@Path("all")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ArrayList<JsonCidade> getCids(){
-		ArrayList<JsonCidade> cidadel = new ArrayList<>();
-		for(Cidade cid:beanCrudCidade.getAll()){
-			cidadel.add(new JsonCidade(cid.getId(),cid.getNome()));
-		}
-		return cidadel;
+	    ArrayList<JsonCidade> cidadel = new ArrayList<>();
+	    for(Cidade cid : beanCrudCidade.getAll()){
+	        cidadel.add(new JsonCidade(cid.getId(), cid.getNome()));
+	    }
+	    cidadel.sort((c1, c2) -> c1.nome().compareToIgnoreCase(c2.nome()));
+	    return cidadel;
 	}
 
 	@PUT
